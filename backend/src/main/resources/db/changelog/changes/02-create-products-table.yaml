@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-products-table
+      author: mskory
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sku
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: varchar(500)
+              - column:
+                  name: unit_price
+                  type: decimal(13,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image_url
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: active
+                  type: bit default b'1'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: units_in_stock
+                  type: int default 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_created
+                  type: datetime(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_update
+                  type: datetime(6)
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_product_categories
+                    references: product_categories(id)
+
