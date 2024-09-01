@@ -42,25 +42,28 @@
 }
 
 .sidebar-btn {
+  margin-bottom: 1px;
+  margin-top: 1px;
   padding: 12px;
   width: 100%;
   font-size: large;
   border-radius: 0;
-  border: none;
   color: rgba(11, 32, 45, 0.88);
   --bs-btn-active-color: #ffd1e6;
   --bs-btn-active-bg: #0ea8e4;
   --bs-btn-active-border-color: #0ea8e4;
   &:hover {
-    background-color: #0ea8e4;
-    color: rgba(255, 209, 230, 0.82);
-    box-shadow: 0 0 10px rgba(233, 59, 152, 0.28), 0 0 14px rgba(233, 59, 152, 0.18);
+    border-bottom: 1px solid rgba(14, 168, 228, 0.1);
+    border-top: 1px solid rgba(14, 168, 228, 0.1);
+    background-color: rgba(14, 168, 228, 0.76);
+    /*color: rgba(255, 209, 230, 0.82); */
+    box-shadow: 0 0 14px rgba(233, 59, 152, 0.52), 0 0 14px rgba(233, 59, 152, 0.26);
   }
 }
 
 .sidebar-btn:active {
   font-weight: 500;
   background-color: #5bb2e3;
-  box-shadow: 0 0 10px rgba(233, 59, 152, 0.38), 0 0 14px rgba(233, 59, 152, 0.26);
+  box-shadow: 0 0 16px rgba(233, 59, 152, 1), 0 0 14px rgba(233, 59, 152, 0.5);
 }
 

@@ -1,12 +1,13 @@
-import {HttpClient, HttpHandler, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {HttpMethod} from "../enums/http-method";
-import {Observable} from "rxjs";
+import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { HttpMethod } from "../enums/http-method";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class HttpClientUtil extends HttpClient {
+
     headers?: HttpHeaders
     token?: string;
 

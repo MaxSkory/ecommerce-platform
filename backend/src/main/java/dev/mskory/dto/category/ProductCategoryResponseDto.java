@@ -9,6 +9,6 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record ProductCategoryResponseDto(
         Long id,
-        String categoryName
+        String name
 ) implements Serializable {
 }

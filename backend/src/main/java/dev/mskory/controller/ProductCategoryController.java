@@ -1,6 +1,7 @@
 package dev.mskory.controller;
 
 import jakarta.validation.Valid;
+import java.util.List;
 import dev.mskory.dto.category.ProductCategoryRequestDto;
 import dev.mskory.dto.category.ProductCategoryResponseDto;
 import dev.mskory.service.ProductCategoryService;
@@ -37,8 +38,8 @@ public class ProductCategoryController {
     }
 
     @GetMapping
-    public Page<ProductCategoryResponseDto> getPage(Pageable pageable) {
-        return categoryService.getAll(pageable);
+    public List<ProductCategoryResponseDto> getPage() {
+        return categoryService.getAll();
     }
 
     @PatchMapping("/{id}")

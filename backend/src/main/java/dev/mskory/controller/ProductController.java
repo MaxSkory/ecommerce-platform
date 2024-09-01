@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
-//@CrossOrigin("http://localhost:4200")
 public class ProductController {
 
     private final ProductService productService;
@@ -41,6 +40,11 @@ public class ProductController {
     @GetMapping
     public Page<ProductResponseDto> getPage(Pageable pageable) {
         return productService.getAll(pageable);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public Page<ProductResponseDto> getPage(@PathVariable Long categoryId, Pageable pageable) {
+        return productService.getProductsByCategoryId(categoryId, pageable);
     }
 
     @PatchMapping("/{id}")

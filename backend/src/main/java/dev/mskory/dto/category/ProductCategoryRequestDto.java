@@ -10,6 +10,6 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record ProductCategoryRequestDto(
         @NotBlank
-        String categoryName
+        String name
 ) implements Serializable {
 }
