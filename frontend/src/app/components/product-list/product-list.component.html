@@ -3,23 +3,51 @@
     <div class="container-fluid">
       <div class="row">
 
-        <div class="col-md-3" *ngFor="let product of products">
-
-          <div class="card w-98 mb-3">
-            <div class="card-img-top">
-              <div class="product-image-container mt-2">
-                <img class="product-image" src="{{product.imageUrl}}" appDefaultImg>
+        <div class="wait-placeholder" *ngIf="products == undefined">
+          <div class="row">
+            <div class="col-md-3" *ngFor="let i of [].constructor(page.size)">
+              <div class="card w-98 mb-3" style="cursor: wait" aria-hidden="true">
+                <div class="product-image-container p-2 mt-2">
+                <img src="{{Constants.IMG_PLACEHOLDER}}" class="card-img-top placeholder-wave" alt="...">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-10"></span>
+                    <span class="placeholder"></span>
+                  </h5>
+                  <p class="card-text placeholder-glow mb-1">
+                    <span class="placeholder col-11"></span>
+                    <span class="placeholder col-10"></span>
+                    <span class="placeholder col-9"></span>
+                    <span class="placeholder col-10"></span>
+                  </p>
+                  <p class="card-text placeholder-glow mb-1">
+                    <span class="price placeholder col-3"></span>
+                  </p>
+                  <a class="btn btn-outline-info primary-btn disabled placeholder w-100" aria-disabled="true"></a>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="col-md-3" *ngFor="let product of products">
+          <div class="card w-98 mb-3" (click)="getProductDetails(product)">
+            <div class="product-image-container p-2 mt-2">
+              <img src="{{product.imageUrl}}" class="card-img-top" appDefaultImg>
+            </div>
             <div class="card-body">
-              <h5 class="card-title">{{product.name}}</h5>
-              <!--              <p class="card-text">{{product.description}}</p>-->
-                <div class="price">{{product.unitPrice | currency : 'USD'}}</div>
-                <a class="btn btn-outline-info primary-btn w-100" href="#">Add to Cart</a>
+              <h5 class="card-title truncate-overflow-2">{{product.name}}</h5>
+              <p class="card-text truncate-overflow-4">{{product.description}}</p>
+              <div class="price">{{product.unitPrice | currency : 'USD'}}</div>
+              <a class="btn btn-outline-info primary-btn w-100" href="#">Add to Cart</a>
             </div>
           </div>
-
         </div>
+      </div>
+
+      <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" align="center">
+        No products found.
       </div>
 
       <div class="footer-pagination">

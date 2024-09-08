@@ -57,7 +57,7 @@
     border-top: 1px solid rgba(14, 168, 228, 0.1);
     background-color: rgba(14, 168, 228, 0.76);
     /*color: rgba(255, 209, 230, 0.82); */
-    box-shadow: 0 0 14px rgba(233, 59, 152, 0.52), 0 0 14px rgba(233, 59, 152, 0.26);
+    box-shadow: 0 0 10px rgba(233, 59, 152, 0.44), 0 0 14px rgba(233, 59, 152, 0.24);
   }
 }
 

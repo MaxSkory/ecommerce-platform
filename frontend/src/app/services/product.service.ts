@@ -30,6 +30,16 @@ export class ProductService {
     })
     return this.httpClient.fetch<GetProductsResponse>(`${this.baseUrl}/category/${categoryId}`, false, params)
   }
+
+  search(keywords: string, categoryId?: number, pageNumber?: number, pageSize?: number, sort?: string) {
+    let params = this.httpClient.createHttpParams({
+      categoryIds: categoryId,
+      page: pageNumber,
+      size: pageSize,
+      sort: sort
+    })
+    return this.httpClient.fetch<GetProductsResponse>(`${this.baseUrl}/search?keywords=${keywords}`, false, params)
+  }
 }
 
 interface GetProductsResponse {

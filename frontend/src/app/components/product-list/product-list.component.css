@@ -64,7 +64,15 @@
   object-fit: scale-down;
 }
 
+.card-title {
+  min-height: 48px;
+}
+
 .card-footer {
   display: flex;
   justify-content: space-between;
+}
+
+.wait-placeholder {
+  cursor: wait;
 }

@@ -3,12 +3,12 @@ package dev.mskory.controller;
 import jakarta.validation.Valid;
 import dev.mskory.dto.product.ProductRequestDto;
 import dev.mskory.dto.product.ProductResponseDto;
+import dev.mskory.dto.product.ProductSpecificationDto;
 import dev.mskory.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -43,7 +43,7 @@ public class ProductController {
     }
 
     @GetMapping("/category/{categoryId}")
-    public Page<ProductResponseDto> getPage(@PathVariable Long categoryId, Pageable pageable) {
+    public Page<ProductResponseDto> getPageByCategoryId(@PathVariable Long categoryId, Pageable pageable) {
         return productService.getProductsByCategoryId(categoryId, pageable);
     }
 
@@ -56,5 +56,10 @@ public class ProductController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {
         productService.deleteById(id);
+    }
+
+    @GetMapping("/search")
+    public Page<ProductResponseDto> search(ProductSpecificationDto dto, Pageable pageable) {
+        return productService.search(dto, pageable);
     }
 }
