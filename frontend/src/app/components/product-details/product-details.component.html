@@ -1,0 +1,41 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col">
+          <div id="imgCarousel" class="carousel slide shadow rounded-2 overflow-hidden">
+            <div class="carousel-indicators w-100 m-0 p-0">
+              <img src="{{product?.primaryImageUrl}}" data-bs-target="#imgCarousel" data-bs-slide-to="0" class="active img-preview" alt="...">
+              <img src="{{imgUrl}}" *ngFor="let imgUrl of product?.imageUrls, let i = index" data-bs-target="#imgCarousel" class="img-preview" [attr.data-bs-slide-to]="i+1" alt="...">
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{{product?.primaryImageUrl}}" class="d-block w-100" alt="...">
+              </div>
+              <div *ngFor="let imgUrl of product?.imageUrls" class="carousel-item">
+                <img src="{{imgUrl}}" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#imgCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#imgCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-5">
+          <div class="price m-0">{{product?.unitPrice}} ₴</div>
+          <h2>{{product?.name}}</h2>
+          <p>{{product?.description}}</p>
+          <a href="#" class="btn btn-info">Add to cart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * DTO for {@link dev.mskory.entity.Product}
@@ -21,7 +22,8 @@ public record ProductRequestDto(
         @Digits(integer = 13, fraction = 2)
         BigDecimal unitPrice,
         @NotBlank
-        String imageUrl,
+        String primaryImageUrl,
+        Set<String> imageUrls,
         @NotNull
         int unitsInStock,
         @NotNull

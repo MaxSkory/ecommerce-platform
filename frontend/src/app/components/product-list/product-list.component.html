@@ -8,7 +8,7 @@
             <div class="col-md-3" *ngFor="let i of [].constructor(page.size)">
               <div class="card w-98 mb-3" style="cursor: wait" aria-hidden="true">
                 <div class="product-image-container p-2 mt-2">
-                <img src="{{Constants.IMG_PLACEHOLDER}}" class="card-img-top placeholder-wave" alt="...">
+                <img src="{{Constants.IMG_PLACEHOLDER}}" class="card-img placeholder-wave" alt="...">
                 </div>
                 <div class="card-body">
                   <h5 class="card-title placeholder-glow">
@@ -32,9 +32,9 @@
         </div>
 
         <div class="col-md-3" *ngFor="let product of products">
-          <div class="card w-98 mb-3" (click)="getProductDetails(product)">
+          <div class="card w-98 mb-3">
             <div class="product-image-container p-2 mt-2">
-              <img src="{{product.imageUrl}}" class="card-img-top" appDefaultImg>
+              <img src="{{product.primaryImageUrl}}" (click)="openProductDetails(product)" class="card-img" appDefaultImg>
             </div>
             <div class="card-body">
               <h5 class="card-title truncate-overflow-2">{{product.name}}</h5>

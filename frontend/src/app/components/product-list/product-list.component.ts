@@ -4,8 +4,9 @@ import {ProductService} from "../../services/product.service";
 import {CurrencyPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {Page} from "../../common/page";
 import {DefaultImgDirective} from "../../util/no-image-directive.util";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Constants} from "../../enums/constants";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-product-list',
@@ -28,59 +29,48 @@ export class ProductListComponent implements OnInit {
   searchMode?: boolean;
 
   constructor(private productService: ProductService,
+              private router: Router,
               private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot)
     this.route.paramMap.subscribe(() => {
-      this.listProducts();
-    })
-  }
-
-  listProducts(){
-    this.categoryId = +this.route.snapshot.paramMap.get("categoryId")!;
-    this.searchMode = this.route.snapshot.paramMap.has("keywords")
-    this.searchMode ? this.handleSearchProducts() : this.handleListProducts()
-  }
-
-  handleSearchProducts() {
-    const keywords: string | null = this.route.snapshot.paramMap.get("keywords")!;
-    if (keywords) {
-      this.productService.search(keywords.trim()
-          .replaceAll(/[^\s\w]/g, "")
-          .replaceAll(" ", ","),
-        this.categoryId, this.page.number, this.page.size).subscribe(
+      this.listProducts().subscribe(
         data => {
           this.products = data.content;
           this.page = data.page;
-        }
-      )
-    } else {
-      this.handleListProducts();
+          StorageService.addProducts(this.products);
+        });
+      ;
+    })
+  }
+
+  listProducts() {
+    this.categoryId = +this.route.snapshot.paramMap.get("categoryId")!;
+    this.searchMode = this.route.snapshot.paramMap.has("keywords");
+    if (this.searchMode) {
+      return this.handleSearchProducts();
     }
+    return this.handleListProducts();
+  }
+
+  handleSearchProducts() {
+    const keywords: string = this.route.snapshot.paramMap.get("keywords")!;
+    return this.productService.search(keywords.trim()
+        .replaceAll(/[^\s\w]/g, "")
+        .replaceAll(" ", ","),
+      this.categoryId, this.page.number, this.page.size);
   }
 
   private handleListProducts() {
     if (this.categoryId) {
-      this.productService.getPageByCategoryId(this.categoryId, this.page.number, this.page.size).subscribe(
-        data => {
-          this.products = data.content;
-          this.page = data.page;
-        }
-      )
-    } else {
-      this.productService.getPage(this.page.number, this.page.size).subscribe(
-        data => {
-          this.products = data.content;
-          this.page = data.page;
-        }
-      )
+      return this.productService.getPageByCategoryId(this.categoryId, this.page.number, this.page.size);
     }
+    return this.productService.getPage(this.page.number, this.page.size);
   }
 
-  getProductDetails(product: Product) {
-    console.log(JSON.stringify(product))
+  openProductDetails(product: Product) {
+    this.router.navigateByUrl(`/products/${product.id}`);
   }
 
   protected readonly Constants = Constants;

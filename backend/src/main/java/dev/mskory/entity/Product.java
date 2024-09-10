@@ -1,6 +1,8 @@
 package dev.mskory.entity;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +13,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -44,8 +48,15 @@ public class Product {
     @Column(name = "unit_price", nullable = false)
     private BigDecimal unitPrice;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name="product_img_urls",
+            joinColumns=@JoinColumn(name="product_id"))
+    @Column(name = "img_url")
+    private List<String> imageUrls;
+
+    @Column(name = "primary_image_url")
+    private String primaryImageUrl;
 
     @Column(name = "active", nullable = false)
     private boolean active;
