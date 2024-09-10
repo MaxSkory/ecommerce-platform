@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/changes/01-create-categories-table.yaml
   - include:
       file: db/changelog/changes/02-create-products-table.yaml
+  - include:
+      file: db/changelog/changes/03-create-product-img-urls-table.yaml

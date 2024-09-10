@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-product-img-urls
+      author: mskory
+      changes:
+        - createTable:
+            tableName: product_img_urls
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: img_url
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_product_img_urls
+                    references: products(id)
+                    nullable: false

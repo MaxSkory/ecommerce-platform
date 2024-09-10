@@ -1,6 +1,7 @@
 package dev.mskory.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import dev.mskory.dto.category.ProductCategoryRequestDto;
 import dev.mskory.dto.category.ProductCategoryResponseDto;
 import dev.mskory.mapper.ProductCategoryMapper;
@@ -32,9 +33,8 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     @Override
-    public Page<ProductCategoryResponseDto> getAll(Pageable pageable) {
-        return categoryRepository.findAll(pageable)
-                .map(categoryMapper::toDto);
+    public List<ProductCategoryResponseDto> getAll() {
+        return categoryRepository.findAll().stream().map(categoryMapper::toDto).toList();
     }
 
     @Override

@@ -4,7 +4,6 @@ export class Page {
   totalElements?: number;
   totalPages?: number;
 
-
   constructor(size: number, number: number) {
     this.size = size;
     this.number = number;

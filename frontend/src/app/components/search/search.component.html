@@ -1,0 +1,8 @@
+<div class="form-header">
+  <input #searchRequest class="au-input au-input-xl"
+         placeholder="Введіть пошуковий запит ..."
+         (keydown.enter)="search(searchRequest.value)"/>
+  <button class="au-btn-submit" (click)="search(searchRequest.value)">
+    Пошук
+  </button>
+</div>

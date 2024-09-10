@@ -1,0 +1,16 @@
+<aside class="menu-sidebar d-none d-lg-block">
+  <div class="logo">
+    <a href="#">
+      <img src="assets/images/logo.png" alt="iCutiePie" class="img-responsive">
+    </a>
+  </div>
+  <div class="menu-sidebar-content js-scrollbar1">
+    <nav class="navbar-sidebar">
+      <div class="d-grid mb-1" *ngFor="let category of categories">
+          <input type="radio" class="btn-check" name="vbtn-radio" id="{{category.id}}" autocomplete="off"
+                 routerLink="products/category/{{category.id}}" >
+          <label class="btn sidebar-btn"  for="{{category.id}}">{{category.name.toUpperCase()}}</label>
+      </div>
+    </nav>
+  </div>
+</aside>

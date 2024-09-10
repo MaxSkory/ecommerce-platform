@@ -1,30 +1,79 @@
-<div class="m-5">
-    <table class="table table-hover">
-        <thead class="table-dark">
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Units in Stock</th>
-        </tr>
-        </thead>
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div class="row">
 
-        <tbody>
-        <tr *ngFor="let product of products">
-            <td class="align-middle">
-                <img ngSrc="{{product.imageUrl ? product.imageUrl : IMG_PLACEHOLDER}}" width="160" height="200" priority="priority"/>
-            </td>
-            <td class="align-middle">
-                {{ product.name }}
-            </td>
-            <td class="align-middle">
-                {{ product.unitPrice}}
-            </td>
-            <td class="align-middle">
-                {{ product.unitsInStock }}
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="wait-placeholder" *ngIf="products == undefined">
+          <div class="row">
+            <div class="col-md-3" *ngFor="let i of [].constructor(page.size)">
+              <div class="card w-98 mb-3" style="cursor: wait" aria-hidden="true">
+                <div class="product-image-container p-2 mt-2">
+                <img src="{{Constants.IMG_PLACEHOLDER}}" class="card-img placeholder-wave" alt="...">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-10"></span>
+                    <span class="placeholder"></span>
+                  </h5>
+                  <p class="card-text placeholder-glow mb-1">
+                    <span class="placeholder col-11"></span>
+                    <span class="placeholder col-10"></span>
+                    <span class="placeholder col-9"></span>
+                    <span class="placeholder col-10"></span>
+                  </p>
+                  <p class="card-text placeholder-glow mb-1">
+                    <span class="price placeholder col-3"></span>
+                  </p>
+                  <a class="btn btn-outline-info primary-btn disabled placeholder w-100" aria-disabled="true"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <div class="col-md-3" *ngFor="let product of products">
+          <div class="card w-98 mb-3">
+            <div class="product-image-container p-2 mt-2">
+              <img src="{{product.primaryImageUrl}}" (click)="openProductDetails(product)" class="card-img" appDefaultImg>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title truncate-overflow-2">{{product.name}}</h5>
+              <p class="card-text truncate-overflow-4">{{product.description}}</p>
+              <div class="price">{{product.unitPrice | currency : 'USD'}}</div>
+              <a class="btn btn-outline-info primary-btn w-100" href="#">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" align="center">
+        No products found.
+      </div>
+
+      <div class="footer-pagination">
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-3">
+            <div class="items">
+              <label>Item per page</label> <select>
+              <option>10</option>
+              <option>20</option>
+              <option>30</option>
+              <option>40</option>
+            </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="number">1 - 10 of 100</div>
+          </div>
+          <div class="col-md-1">
+            <div class="arrows">
+              <a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+              <a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

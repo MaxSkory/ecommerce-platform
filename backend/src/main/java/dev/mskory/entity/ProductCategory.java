@@ -28,8 +28,8 @@ public class ProductCategory {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "category_name", nullable = false, unique = true)
-    private String categoryName;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     @ToString.Exclude

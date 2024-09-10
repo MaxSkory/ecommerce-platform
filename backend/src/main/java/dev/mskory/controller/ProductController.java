@@ -3,12 +3,12 @@ package dev.mskory.controller;
 import jakarta.validation.Valid;
 import dev.mskory.dto.product.ProductRequestDto;
 import dev.mskory.dto.product.ProductResponseDto;
+import dev.mskory.dto.product.ProductSpecificationDto;
 import dev.mskory.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
-//@CrossOrigin("http://localhost:4200")
 public class ProductController {
 
     private final ProductService productService;
@@ -43,6 +42,11 @@ public class ProductController {
         return productService.getAll(pageable);
     }
 
+    @GetMapping("/category/{categoryId}")
+    public Page<ProductResponseDto> getPageByCategoryId(@PathVariable Long categoryId, Pageable pageable) {
+        return productService.getProductsByCategoryId(categoryId, pageable);
+    }
+
     @PatchMapping("/{id}")
     public ProductResponseDto update(@PathVariable Long id, @RequestBody ProductRequestDto dto) {
         return productService.updateById(id, dto);
@@ -52,5 +56,10 @@ public class ProductController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {
         productService.deleteById(id);
+    }
+
+    @GetMapping("/search")
+    public Page<ProductResponseDto> search(ProductSpecificationDto dto, Pageable pageable) {
+        return productService.search(dto, pageable);
     }
 }
